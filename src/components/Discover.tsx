@@ -1,13 +1,18 @@
 import React from "react";
 import genres, { Genre } from "../assets/constants";
 import Loader from "./Loader";
+import Error from "./Error";
+import SongCard from "./SongCard";
+import { shazamApi } from "../redux/services/shazam";
+import { Track } from "../redux/services/shazam";
 
 function Discover() {
-  // const { data, isFetching, error } = useGetTracksQuery();
-  const isFetching = false;
-
-  if (!isFetching) {
+  const { data, isFetching, error } = shazamApi.useGetTracksQuery();
+  if (isFetching) {
     return <Loader />;
+  }
+  if (error) {
+    return <Error />;
   }
   return (
     <div className="flex flex-col">
@@ -25,8 +30,8 @@ function Discover() {
         </select>
       </div>
       <div className="flex flex-wrap sm:justify-start justify-center gap-8">
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((song, i) => (
-          <div key={song}>songcard</div>
+        {data?.tracks.map((song: Track, i: number) => (
+          <SongCard song={song} key={song.key} index={i} />
         ))}
       </div>
     </div>

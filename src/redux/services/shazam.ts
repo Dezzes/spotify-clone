@@ -1,11 +1,12 @@
 import axios from "axios";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-interface RootObject {
+interface Response {
+  properties: unknown;
   tracks: Track[];
 }
 
-interface Track {
+export interface Track {
   layout: string;
   type: string;
   key: string;
@@ -96,7 +97,6 @@ export const shazamApi = createApi({
     },
   }),
   endpoints: (builder) => ({
-    getTracks: builder.query<Track[], void>({ query: () => "/charts/track" }),
+    getTracks: builder.query<Response, void>({ query: () => "/charts/track" }),
   }),
 });
-export const { useGetTracksQuery } = shazamApi;
