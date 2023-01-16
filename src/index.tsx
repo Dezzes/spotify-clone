@@ -5,19 +5,25 @@ import { Provider } from "react-redux";
 import React from "react";
 import App from "./App";
 import store from "./redux/store";
+import SongDetails from "./components/SongDetails";
+import Discover from "./components/Discover";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <Discover />,
+    children: [
+      {
+        path: "songs/:songId",
+        element: <SongDetails />,
+      },
+    ],
   },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <RouterProvider router={router} />
-    </Provider>
-  </React.StrictMode>
+  <Provider store={store}>
+    <RouterProvider router={router} />
+  </Provider>
 );

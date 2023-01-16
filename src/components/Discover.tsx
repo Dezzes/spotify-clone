@@ -1,13 +1,15 @@
 import React from "react";
-import genres, { Genre } from "../assets/constants";
+import { Genre, genres } from "../assets/constants";
 import Loader from "./Loader";
 import Error from "./Error";
 import SongCard from "./SongCard";
-import { shazamApi } from "../redux/services/shazam";
-import { Track } from "../redux/services/shazam";
+import { useAppSelector } from "../hooks/reduxHooks";
+import shazamApi from "../redux/services/shazam";
+import { Track } from "../models/TrackResponse";
 
 function Discover() {
   const { data, isFetching, error } = shazamApi.useGetTracksQuery();
+  const { isPlaying, activeSong } = useAppSelector((state) => state.player);
   if (isFetching) {
     return <Loader />;
   }
@@ -31,7 +33,14 @@ function Discover() {
       </div>
       <div className="flex flex-wrap sm:justify-start justify-center gap-8">
         {data?.tracks.map((song: Track, i: number) => (
-          <SongCard song={song} key={song.key} index={i} />
+          <SongCard
+            isPlaying={isPlaying}
+            activeSong={activeSong}
+            song={song}
+            key={song.key}
+            index={i}
+            tracks={data.tracks}
+          />
         ))}
       </div>
     </div>

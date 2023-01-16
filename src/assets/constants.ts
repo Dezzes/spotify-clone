@@ -1,10 +1,24 @@
+import { IconType } from "react-icons";
+import {
+  HiOutlineHashtag,
+  HiOutlineHome,
+  HiOutlinePhotograph,
+  HiOutlineUserGroup,
+} from "react-icons/hi";
+
 export interface Genre {
   title: string;
   value: string;
   id: string;
 }
 
-const genres: Genre[] = [
+export interface SideBarLinks {
+  name: string;
+  to: string;
+  icon: IconType;
+}
+
+export const genres: Genre[] = [
   { title: "Pop", value: "POP", id: "1" },
   { title: "Hip-Hop", value: "HIP_HOP_RAP", id: "2" },
   { title: "Dance", value: "DANCE", id: "3" },
@@ -20,4 +34,10 @@ const genres: Genre[] = [
   { title: "House", value: "HOUSE", id: "13" },
   { title: "K-Pop", value: "K_POP", id: "14" },
 ];
-export default genres;
+
+export const links: SideBarLinks[] = [
+  { name: "Discover", to: "/", icon: HiOutlineHome },
+  { name: "Around You", to: "/around-you", icon: HiOutlinePhotograph },
+  { name: "Top Artists", to: "/top-artists", icon: HiOutlineUserGroup },
+  { name: "Top Charts", to: "/top-charts", icon: HiOutlineHashtag },
+];
