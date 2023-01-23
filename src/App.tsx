@@ -1,4 +1,5 @@
 import React from "react";
+import { Outlet } from "react-router-dom";
 import Discover from "./components/Discover";
 import MusicPlayer from "./components/MusicPlayer";
 import SearchBar from "./components/SearchBar";
@@ -15,7 +16,7 @@ function App() {
         <SearchBar />
         <div className="px-6 h-[calc(100vh-72px)] overflow-y-scroll hide-scrollbar flex flex-col xl:flex-row">
           <div className="flex-1 h-fit pb-40">
-            <Discover />
+            <Outlet />
           </div>
           <div className="xl-sticky relative top-0 h-fit">
             <TopPlay />

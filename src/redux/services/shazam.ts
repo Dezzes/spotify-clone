@@ -1,6 +1,7 @@
 import axios from "axios";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { TracksResponse } from "../../models/TrackResponse";
+import { SongDetailsResponse } from "../../models/SongDetailsResponse";
 
 const shazamApi = createApi({
   reducerPath: "shazamAPI",
@@ -13,6 +14,9 @@ const shazamApi = createApi({
   }),
   endpoints: (builder) => ({
     getTracks: builder.query<TracksResponse, void>({ query: () => "/charts/track" }),
+    getTrackDetails: builder.query<SongDetailsResponse, string>({
+      query: (songId) => `/songs/get-details?key=${songId}`,
+    }),
   }),
 });
 

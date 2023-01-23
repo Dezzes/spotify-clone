@@ -11,7 +11,7 @@ import Discover from "./components/Discover";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Discover />,
+    element: <App />,
     children: [
       {
         path: "songs/:songId",
